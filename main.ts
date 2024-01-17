@@ -9,12 +9,14 @@ import { Pet } from "./resolvers/Pet.ts";
 
 
 const MONGO_URL = Deno.env.get("MONGO_URL");
-
 if (!MONGO_URL) {
-  console.log("No mongo URL found");
-  Deno.exit(1);
+  throw new Error("Please provide a MongoDB connection string");
 }
+
+// Connect to MongoDB
 await mongoose.connect(MONGO_URL);
+
+console.info("🚀 Connected to MongoDB");
 
 const server = new ApolloServer({
     typeDefs,
