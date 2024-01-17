@@ -9,7 +9,7 @@ import { Pet } from "./resolvers/Pet.ts";
 import { load } from "https://deno.land/std@0.204.0/dotenv/mod.ts";
 
 const env = await load();
-const MONGO_URL = env.MONGO_URL;
+const MONGO_URL = env.MONGO_URL || Deno.env.get("MONGO_URL");
 if (!MONGO_URL) {
   throw new Error("Please provide a MongoDB connection string");
 }
